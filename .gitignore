@@ -1,0 +1,56 @@
+# Git untracked files to ignore.
+
+# Cache.
+jenkins/jenkins_home/.cache/
+
+# Fingerprint records.
+jenkins/jenkins_home/fingerprints/
+
+# Working directories.
+jenkins/jenkins_home/workspace/
+
+# Secret files.
+jenkins/jenkins_home/secrets
+jenkins/jenkins_home/secret.*
+jenkins/jenkins_home/*.enc
+jenkins/jenkins_home/*.key
+jenkins/jenkins_home/users/
+jenkins/jenkins_home/id_rsa
+
+# Plugins.
+jenkins/jenkins_home/plugins/
+
+# State files.
+jenkins/jenkins_home/*.state
+
+# Job state files.
+jenkins/jenkins_home/builds/
+jenkins/jenkins_home/lastStable
+jenkins/jenkins_home/lastSuccessful
+jenkins/jenkins_home/nextBuildNumber
+
+# Updates.
+jenkins/jenkins_home/updates/
+
+# Hidden files.
+jenkins/jenkins_home/.*
+# Except git config files.
+jenkins/jenkins_home/!.git*
+jenkins/jenkins_home/!.ssh/
+
+# User content.
+jenkins/jenkins_home/userContent/
+
+# Log files.
+jenkins/jenkins_home/logs/
+jenkins/jenkins_home/*.log
+
+# Miscellaneous litter
+jenkins/jenkins_home/*.tmp
+jenkins/jenkins_home/*.old
+jenkins/jenkins_home/*.bak
+jenkins/jenkins_home/*.jar
+jenkins/jenkins_home/*.json
+jenkins/jenkins_home/*.lastExecVersion
+
+logs/*

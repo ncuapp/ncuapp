@@ -1,0 +1,55 @@
+version: '3'
+
+networks:
+  backend:
+    driver: bridge
+
+volumes:
+  node_modules:
+
+services:
+  jenkins:
+    restart: always
+    image: jenkins/jenkins
+    container_name: ncuapp-jenkins
+    ports:
+      - '8080:8080'
+      - '50000:5000'
+    volumes:
+      - ./jenkins/jenkins_home:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /usr/bin/docker:/usr/bin/docker
+      - /usr/lib/x86_64-linux-gnu/libltdl.so.7:/usr/lib/x86_64-linux-gnu/libltdl.so.7
+
+  nginx:
+    restart: always
+    container_name: ncuapp-nginx
+    build:
+      context: ./nginx/
+      dockerfile: ./Dockerfile
+    image: nginx
+    depends_on:
+      - oauth
+    ports:
+      - '3030:3030'
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/cert:/etc/nginx/cert
+      - ./logs/nginx:/var/log/nginx
+    networks:
+      - backend
+
+  oauth:
+    restart: always
+    container_name: ncuapp-oauth
+    build:
+      context: ./oauth/
+      dockerfile: ./configs/Dockerfile
+    environment:
+      - SERVER_PORT=3030
+    # ports:
+    #   - '3030:3030'
+    networks:
+      - backend
+    # volumes:
+    #   - node_modules:/oauth/node_modules/
